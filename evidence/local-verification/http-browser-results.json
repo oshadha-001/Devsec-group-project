@@ -1,0 +1,103 @@
+{
+  "date": "2026-09-29T20:55:52.224Z",
+  "comparison": "Upstream 2.12.7 release handlers, with documented shared deployment and seed adaptations; separate databases.",
+  "checks": [
+    {
+      "name": "startup",
+      "mode": "before",
+      "status": "passed",
+      "displayedVersion": "2.12.6"
+    },
+    {
+      "name": "SQL injection same-input replay",
+      "mode": "before",
+      "status": "passed",
+      "recordsReturned": 40
+    },
+    {
+      "name": "legitimate account lookup",
+      "mode": "before",
+      "status": "passed",
+      "recordsReturned": 1
+    },
+    {
+      "name": "stored XSS same-input replay",
+      "mode": "before",
+      "status": "passed",
+      "scriptCreatedVisibleHeading": true,
+      "literalScriptVisible": false
+    },
+    {
+      "name": "command injection same-input replay",
+      "mode": "before",
+      "status": "passed",
+      "executionMarkerInCommandOutput": true
+    },
+    {
+      "name": "browser CSRF same-input replay",
+      "mode": "before",
+      "status": "passed",
+      "httpStatus": 200,
+      "forgedBlogInserted": true,
+      "origin": "127.0.0.1:8090",
+      "cookieContext": "Same-site, different origin; SameSite=Lax"
+    },
+    {
+      "name": "legitimate authenticated blog submission",
+      "mode": "before",
+      "status": "passed",
+      "storedEntryPresent": true
+    },
+    {
+      "name": "startup",
+      "mode": "after",
+      "status": "passed",
+      "displayedVersion": "2.12.6"
+    },
+    {
+      "name": "SQL injection same-input replay",
+      "mode": "after",
+      "status": "passed",
+      "recordsReturned": 0
+    },
+    {
+      "name": "legitimate account lookup",
+      "mode": "after",
+      "status": "passed",
+      "recordsReturned": 1
+    },
+    {
+      "name": "stored XSS same-input replay",
+      "mode": "after",
+      "status": "passed",
+      "scriptCreatedVisibleHeading": false,
+      "literalScriptVisible": true
+    },
+    {
+      "name": "command injection same-input replay",
+      "mode": "after",
+      "status": "passed",
+      "executionMarkerInCommandOutput": false
+    },
+    {
+      "name": "legitimate hostname lookup",
+      "mode": "after",
+      "status": "passed"
+    },
+    {
+      "name": "browser CSRF same-input replay",
+      "mode": "after",
+      "status": "passed",
+      "httpStatus": 403,
+      "forgedBlogInserted": false,
+      "origin": "127.0.0.1:8090",
+      "cookieContext": "Same-site, different origin; SameSite=Lax"
+    },
+    {
+      "name": "legitimate authenticated blog submission",
+      "mode": "after",
+      "status": "passed",
+      "storedEntryPresent": true
+    }
+  ]
+}

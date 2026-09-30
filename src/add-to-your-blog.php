@@ -9,9 +9,13 @@
 		Known Vulnerable Output: Name, Comment, "Add blog for" title,
 	*/
 
-	/* Instantiate CSRF Protection object */
-	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
-	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
+    require_once __SITE_ROOT__.'/classes/GroupCsrf.php';
+    if (isset($_POST['add-to-your-blog-php-submit-button']) &&
+        (!($_SESSION['user_is_logged_in'] ?? false) || !GroupCsrf::valid($_POST['csrf-token'] ?? null))) {
+        http_response_code(403);
+        echo '<p class="error-message">Blog submission rejected: authentication or CSRF token is invalid.</p>';
+        return;
+    }
 
 	switch ($_SESSION["security-level"]){
 		default: // Default case: This code is insecure
@@ -95,7 +99,7 @@
    		break;
    	}// end switch
 
-	$lNewCSRFTokenForNextRequest = $lCSRFTokenHandler->generateCSRFToken();
+	$lNewCSRFTokenForNextRequest = GroupCsrf::token();
    	$lFormSubmitted = isSet($_POST["add-to-your-blog-php-submit-button"]);
 	/* ----------------------------------------
 	 * Insert user's new blog entry
@@ -104,16 +108,6 @@
 	 */
 	if($lFormSubmitted){
 		try {
-
-			if ($lProtectAgainstMethodTampering) {
-				$lPostedCSRFToken = $_POST['csrf-token'];
-			}else{
-				$lPostedCSRFToken = $_REQUEST['csrf-token'];
-			}//end if
-
-			if (!$lCSRFTokenHandler->validateCSRFToken($lPostedCSRFToken)){
-				throw (new Exception("Security Violation: Cross Site Request Forgery attempt detected.", 500));
-			}// end if
 
 			// Grab inputs
 			if ($lProtectAgainstSQLInjection){
@@ -327,6 +321,6 @@
 
 <?php
 	if ($lFormSubmitted) {
-		echo $lCSRFTokenHandler->generateCSRFHTMLReport();
+		echo '<p>Session-bound CSRF protection is active.</p>';
 	}// end if
 ?>

@@ -1,0 +1,1 @@
+Combined reference after four prepared stages. Apply foundation and member packages sequentially. Read docs/VERIFICATION.md: local route tests passed; inherited scan findings and manual GitHub/signature work remain.
