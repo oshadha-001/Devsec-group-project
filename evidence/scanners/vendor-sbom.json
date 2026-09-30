@@ -1,0 +1,81 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "src/javascript/jQuery/jquery.js",
+      "name": "jquery",
+      "version": "1.8.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "756d7dfac4a35bb57543f677283d6c682e8d704e5350884b27325badd2b3c4a7"
+        }
+      ],
+      "properties": [
+        {
+          "name": "source-file",
+          "value": "src/javascript/jQuery/jquery.js"
+        }
+      ],
+      "purl": "pkg:npm/jquery@1.8.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "src/javascript/ddsmoothmenu/jquery.min.js",
+      "name": "jquery",
+      "version": "1.3.2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c8370a2d050359e9d505acc411e6f457a49b21360a21e6cbc9229bad3a767899"
+        }
+      ],
+      "properties": [
+        {
+          "name": "source-file",
+          "value": "src/javascript/ddsmoothmenu/jquery.min.js"
+        }
+      ],
+      "purl": "pkg:npm/jquery@1.3.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "src/javascript/jQuery/colorbox/jquery.colorbox.js",
+      "name": "Colorbox",
+      "version": "1.3.20.2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8f6de13507012b92398fc693d62afe5d0ce46b81f65f8d4fb0953a1e3df4af4d"
+        }
+      ],
+      "properties": [
+        {
+          "name": "source-file",
+          "value": "src/javascript/jQuery/colorbox/jquery.colorbox.js"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "src/webservices/soap/lib/nusoap.php",
+      "name": "NuSOAP",
+      "version": "0.9.11",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "03d9f763fa557910676040673c7b1453188b7066920a192f3f33dabf9941b7b0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "source-file",
+          "value": "src/webservices/soap/lib/nusoap.php"
+        }
+      ]
+    }
+  ]
+}

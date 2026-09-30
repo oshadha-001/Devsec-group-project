@@ -56,7 +56,7 @@
     			/* Protect against XSS by output encoding */
     			$lTargetHostText = $Encoder->encodeForHTML($lTargetHost);
 	    	}else{
-				$lTargetHostText = $lTargetHost; 		//allow XSS by not encoding output
+				$lTargetHostText = htmlspecialchars((string)$lTargetHost, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); 		//allow XSS by not encoding output
 	    	}//end if
 
 		}// end if $lFormSubmitted
@@ -149,28 +149,19 @@
 	    try{
 	    	if ($lTargetHostValidated){
 	    		echo '<div class="report-header">Results for '.$lTargetHostText.'</div>';
-	    		if ($lProtectAgainstCommandInjection) {
-	    		    $lResults = dns_get_record($lTargetHost, DNS_A);
-	    		    echo '<pre class="output">';
-	    		    foreach ($lResults as $lItem => $lArray) {
-	    		        foreach ($lArray as $lRecord => $lValue) {
-	    		            if ($lRecord == "host" || $lRecord == "ip") {
-    	    		            echo $lRecord.': '.$lValue.'<br />';
-    	    		        }// end if
-	    		        }// end foreach
-	    		        echo '<br />';
-	    		    }// end foreach
-	    		    echo '</pre>';
-	    		}else{
-	    		    echo '<pre class="output">'.shell_exec("nslookup " . $lTargetHost).'</pre>';
-	    		}//end if $lProtectAgainstCommandInjection
-				$LogHandler->writeToLog("Executed operating system command: nslookup " . $lTargetHostText);
+                require_once __SITE_ROOT__.'/classes/GroupDns.php';
+                $addresses = GroupDns::resolve($lTargetHost);
+                echo '<pre class="output">'.htmlspecialchars(
+                    $addresses ? implode("\n", $addresses) : 'No IPv4 records found.',
+                    ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8').'</pre>';
+
+				$LogHandler->writeToLog("Resolved hostname with PHP: " . $lTargetHostText);
 	    	}else{
 	    		echo '<script>document.getElementById("id-bad-cred-tr").style.display=""</script>';
 	    	}// end if $lTargetHostValidated
 
     	}catch(Exception $e){
-			echo $CustomErrorHandler->FormatError($e, "Input: " . $lTargetHost);
+			http_response_code(400); echo '<p class="error-message">Invalid hostname or IP address. Request rejected.</p>';
     	}// end try
 
 	}// end if (isset($_POST))
