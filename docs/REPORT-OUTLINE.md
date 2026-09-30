@@ -1,0 +1,1 @@
+The assembled Word and PDF report is now included in docs/Mutillidae_II_Group_Report.docx and .pdf. Review it, enter actual PR and Actions references and complete genuine contribution declarations before submission. See docs/VERIFICATION.md for measured results and unresolved work.

@@ -1,0 +1,90 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2026-09-29T20:57:05.338242475Z",
+  "ArtifactName": "/input/vendor-sbom.json",
+  "ArtifactType": "cyclonedx",
+  "Metadata": {
+    "ImageConfig": {
+      "architecture": "",
+      "created": "0001-01-01T00:00:00Z",
+      "os": "",
+      "rootfs": {
+        "type": "",
+        "diff_ids": null
+      },
+      "config": {}
+    }
+  },
+  "Results": [
+    {
+      "Target": "Node.js",
+      "Class": "lang-pkgs",
+      "Type": "node-pkg",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "NSWG-ECO-328",
+          "PkgID": "jquery@1.8.3",
+          "PkgName": "jquery",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/jquery@1.8.3",
+            "UID": "9714ec5240bce14d",
+            "BOMRef": "src/javascript/jQuery/jquery.js"
+          },
+          "InstalledVersion": "1.8.3",
+          "FixedVersion": "\u003e=3.0.0",
+          "Status": "fixed",
+          "Layer": {},
+          "SeveritySource": "nodejs-security-wg",
+          "DataSource": {
+            "ID": "nodejs-security-wg",
+            "Name": "Node.js Ecosystem Security Working Group",
+            "URL": "https://github.com/nodejs/security-wg"
+          },
+          "Title": "Cross-Site Scripting (XSS)",
+          "Description": "Jquery is a javascript library for DOM traversal and manipulation, event handling, animation, and Ajax. \n\nWhen text/javascript responses are received from cross-origin ajax requests not containing the option `dataType`, the result is executed in `jQuery.globalEval` potentially allowing an attacker to execute arbitrary code on the origin.",
+          "Severity": "HIGH",
+          "VendorSeverity": {
+            "nodejs-security-wg": 3
+          },
+          "References": [
+            "https://github.com/jquery/jquery/commit/b078a62013782c7424a4a61a240c23c4c0b42614%29",
+            "https://github.com/jquery/jquery/issues/2432%29",
+            "https://github.com/jquery/jquery/pull/2588%29"
+          ]
+        },
+        {
+          "VulnerabilityID": "NSWG-ECO-329",
+          "PkgID": "jquery@1.8.3",
+          "PkgName": "jquery",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/jquery@1.8.3",
+            "UID": "9714ec5240bce14d",
+            "BOMRef": "src/javascript/jQuery/jquery.js"
+          },
+          "InstalledVersion": "1.8.3",
+          "FixedVersion": "\u003e=1.9.0",
+          "Status": "fixed",
+          "Layer": {},
+          "SeveritySource": "nodejs-security-wg",
+          "DataSource": {
+            "ID": "nodejs-security-wg",
+            "Name": "Node.js Ecosystem Security Working Group",
+            "URL": "https://github.com/nodejs/security-wg"
+          },
+          "Title": "XSS via improper selector detection",
+          "Description": "jQuery is a javascript library for DOM manipulation. \n\njQuery's main method in affected versions contains an unreliable way of detecting whether the input to the `jQuery(strInput)` function is intended to be a selector or HTML.\n\nFor example, this code would be parsed as a selector, executing the code in the `onerror` attribute:\n```\n$(\"#log\").html(\n    $(\"element[attribute='\u003cimg src=\\\"x\\\" onerror=\\\"alert(1)\\\" /\u003e']\").html()\n);\n```\n\nThe fix in v1.9.0 updates a regular expression for detecting whether the input is HTML or a selector. HTML input must now explicitly start with `\u003c`, rather than previously assuming that the input was HTML if the string contained `\u003c` anywhere.",
+          "Severity": "HIGH",
+          "VendorSeverity": {
+            "nodejs-security-wg": 3
+          },
+          "References": [
+            "https://bugs.jquery.com/ticket/11290%29",
+            "https://bugs.jquery.com/ticket/12531%29",
+            "https://bugs.jquery.com/ticket/6429%29",
+            "https://bugs.jquery.com/ticket/9521%29"
+          ]
+        }
+      ]
+    }
+  ]
+}

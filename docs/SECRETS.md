@@ -1,0 +1,7 @@
+# Secrets provisioning
+
+Initialize-Secrets.ps1 generates 32 random bytes per local credential and stores hexadecimal values in ignored .secrets files. Compose mounts each secret only into services that require it. The web receives the app database password, not MySQL root or seed-user passwords. The database account is scoped to the mutillidae database; schema/seed privileges could be split from runtime DML in a future improvement.
+
+The manual runtime workflow requires an encrypted GitHub Actions secret named LAB_DB_PASSWORD containing 64 random lowercase hexadecimal characters. It is passed through an environment variable to the initializer, which writes a temporary local file without printing the value. Other credentials are generated on the runner. Fork PRs never receive this secret. Screenshots may show the secret's name but never its value. Keep raw responses that contain credentials private and redact before publication.
+
+The upstream application stores its synthetic passwords in plaintext; changing live defaults to runtime inputs is not password hashing. Other deliberately vulnerable lab pages can expose data. This limitation must be disclosed and fixed if expanding the scope. Do not use real credentials or real personal data. Existing seed data is retained; replacing a secret file does not update the password in an existing database. Rotation requires an intentional database/account update, not a blind restart.

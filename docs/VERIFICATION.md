@@ -17,4 +17,4 @@ The normal security pipeline is NOT verified green: inherited dependency/image f
 
 Manual group actions still required: submit four real reviewed PRs in order, provision LAB_DB_PASSWORD in Actions secrets, run and capture actual hosted workflows, test the merged revision, record actual human contributions, sign declarations and attach the already-submitted signed ethical-clearance copy. The signed file was not available to include. No commits, pushes, PRs, student signatures or messages were made on behalf of group members.
 
-Full report: submission/Mutillidae_II_Group_Report.docx and .pdf. Scanner JSON files and image identities are under runtime-evidence (copied into evidence/local-verification in the final source). Local demonstrations used only synthetic data and the user's authorized Mutillidae environment.
+Full report: docs/Mutillidae_II_Group_Report.docx and .pdf. Scanner JSON files and image identities are under evidence/local-verification. Local demonstrations used only synthetic data and the user's authorized Mutillidae environment.

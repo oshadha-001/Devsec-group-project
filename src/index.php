@@ -1,4 +1,6 @@
 <?php
+    // Buffer the page so included handlers can set an HTTP rejection status.
+    ob_start();
 
 	/* ------------------------------------------
 	 * Constants used in application
