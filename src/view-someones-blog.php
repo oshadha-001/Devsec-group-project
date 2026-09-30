@@ -103,11 +103,7 @@
 								
 							    while($row = $lQueryResult->fetch_object()){
 
-									if(!$lEncodeOutput){
-										$lUsername = $row->username;
-									}else{
-										$lUsername = $Encoder->encodeForHTML($row->username);
-									}// end if
+									$lUsername = htmlspecialchars((string)$row->username, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 									
 								    echo '<option value="' . $lUsername . '">' . $lUsername . '</option>\n';
 									
@@ -179,15 +175,9 @@
 			    	/* Simple but effective security against XSS. Encode output per context if
 					 * we are in secure-mode.
 					 */
-					if(!$lEncodeOutput){
-						$lBloggerName = $row->blogger_name;
-						$lDate = $row->date;
-						$lComment = $row->comment;
-					}else{
-						$lBloggerName = $Encoder->encodeForHTML($row->blogger_name);
-						$lDate = $Encoder->encodeForHTML($row->date);
-						$lComment = $Encoder->encodeForHTML($row->comment);
-					}// end if
+					$lBloggerName = htmlspecialchars((string)$row->blogger_name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                    $lDate = htmlspecialchars((string)$row->date, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                    $lComment = htmlspecialchars((string)$row->comment, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 			    	
 					/* Some dangerous markup allowed. Here we restore the tokenized output. 
 					 * Note that using GUIDs as tokens works well because they are 
