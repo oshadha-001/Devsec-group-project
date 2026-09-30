@@ -384,23 +384,15 @@ class SQLQueryHandler {
 	}//end public function getUserAccountByID
 
 	public function getUserAccount($pUsername, $pPassword){
-   		/*
-  		 * Note: While escaping works ok in some case, it is not the best defense.
- 		 * Using stored procedures is a much stronger defense.
- 		 */
-
-		if ($this->stopSQLInjection){
-			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
-			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
-		}// end if
-
-		$lQueryString =
-			"SELECT * FROM accounts
-			WHERE username='".$pUsername.
-			"' AND password='".$pPassword."'";
-
-		return $this->mMySQLHandler->executeQuery($lQueryString);
-	}//end public function getUserAccount
+        if (!is_string($pUsername) || !is_string($pPassword) ||
+            strlen($pUsername) > 255 || strlen($pPassword) > 255) {
+            throw new InvalidArgumentException('Invalid account input.');
+        }
+        return $this->mMySQLHandler->executePrepared(
+            'SELECT * FROM accounts WHERE username = ? AND password = ?',
+            'ss', [$pUsername, $pPassword]
+        );
+    }
 
 	public function getAccountByClientId($pClientId){
 		/*

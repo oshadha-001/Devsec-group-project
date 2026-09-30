@@ -1,0 +1,11 @@
+flowchart LR
+  Browser[Local browser] -->|127.0.0.1 port 8080| Web[PHP Apache web container]
+  subgraph Private[Internal database network]
+    Web -->|mysqli prepared lookup| DB[(MySQL database)]
+    Seed[One-time synthetic seed] --> DB
+  end
+  Secrets[Ignored runtime secret files] --> Web
+  Secrets --> Seed
+  Secrets --> DB
+  Git[Member branch and PR] --> CI[GitHub Actions]
+  CI --> Scans[SAST dependency secrets image scans]
