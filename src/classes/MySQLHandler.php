@@ -242,7 +242,18 @@ class MySQLHandler {
 		return $this->mMySQLConnection->affected_rows;
 	}//end function
 
-	public function executeQuery($pQueryString){
+	public function executePrepared($sql, $types, array $values){
+        $stmt = $this->mMySQLConnection->prepare($sql);
+        try {
+            $stmt->bind_param($types, ...$values);
+            $stmt->execute();
+            return $stmt->get_result();
+        } finally {
+            $stmt->close();
+        }
+    }
+
+    public function executeQuery($pQueryString){
 		return $this->doExecuteQuery($pQueryString);
 	}// end public function executeQuery
 
