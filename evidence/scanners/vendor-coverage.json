@@ -1,0 +1,9 @@
+{
+  "identifiedComponents": 4,
+  "verifiedPackageIdentities": 2,
+  "limitations": [
+    "Colorbox and NuSOAP versions are recorded without verified registry mapping.",
+    "JWT, Gritter and DHTML menu sources lack verified release identities.",
+    "This bounded inventory may omit other bundled third-party code."
+  ]
+}

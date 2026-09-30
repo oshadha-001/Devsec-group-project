@@ -1,0 +1,32 @@
+rules:
+  - id: group-unbound-account-lookup
+    languages: [php]
+    severity: ERROR
+    message: Account lookup must use bound parameters.
+    pattern: |
+      function getUserAccount(...) {
+        ...
+        $this->mMySQLHandler->executeQuery(...);
+        ...
+      }
+  - id: group-unencoded-blog-comment
+    languages: [php]
+    severity: ERROR
+    message: Stored blog comments need HTML output encoding.
+    pattern: $lComment = $row->comment;
+    paths:
+      include: ['**/view-someones-blog.php']
+  - id: group-shell-dns
+    languages: [php]
+    severity: ERROR
+    message: Resolve DNS without sending input through a shell.
+    pattern: shell_exec(...)
+    paths:
+      include: ['**/dns-lookup.php']
+  - id: group-level-dependent-blog-csrf
+    languages: [php]
+    severity: ERROR
+    message: Blog CSRF protection must not depend on the demo security level.
+    pattern: new CSRFTokenHandler($_SESSION["security-level"], "register-user")
+    paths:
+      include: ['**/add-to-your-blog.php']
